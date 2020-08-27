@@ -45,7 +45,7 @@ Don't forget to install the necessary libraries described in the install paragra
 First you need to run the create_face_model.py file, which uses the images in /data to create a .yaml file
 * In the project folder run 
 ```sh 
-python create_face_model.py
+python3 create_face_model.py -i /path/to/images/
 ```
 * To run the python version of the code you have to put all the input videos in one folder and then provide the path of that folder as command line argument:
 ```sh
