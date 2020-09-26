@@ -31,7 +31,11 @@ def detect_people(frame):
     (rects, weights) = hog.detectMultiScale(frame, winStride=(8, 8), padding=(16, 16), scale=1.06)
     rects = non_max_suppression(rects, probs=None, overlapThresh=0.65)
     for (x, y, w, h) in rects:
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        end_cord_x = x + w
+        end_cord_y = y + h
+        color = (0, 0, 255) #BGR
+        stroke = 2
+        cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
     return frame
 
 
@@ -60,12 +64,12 @@ def recognize_face(frame_orginal, faces):
     predict_conf = []
     for x, y, w, h in faces:
         frame_orginal_grayscale = cv2.cvtColor(frame_orginal[y: y + h, x: x + w], cv2.COLOR_BGR2GRAY)
-        cv2.imshow("cropped", frame_orginal_grayscale)
+        #cv2.imshow("cropped", frame_orginal_grayscale)
         predict_tuple = recognizer.predict(frame_orginal_grayscale)
         a, b = predict_tuple
         predict_label.append(a)
         predict_conf.append(b)
-        print("Predition label, confidence: " + str(predict_tuple))
+        #print("Predition label, confidence: " + str(predict_tuple))
     return predict_label
 
 
